@@ -1,0 +1,44 @@
+@model IEnumerable<MvcJQueryTemplate.Models.Player>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>Name
+        </th>
+        <th>Team
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @(item.Team == null ? "None" : item.Team.Name)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<style>
+    table, td, th {
+        border: 1px solid green;
+    }
+
+    th {
+        background-color: green;
+        color: white;
+    }
+</style>

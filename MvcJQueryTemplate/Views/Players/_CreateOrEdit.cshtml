@@ -1,0 +1,31 @@
+@model MvcJQueryTemplate.Models.Player
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.TotalScored)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.TotalScored)
+    @Html.ValidationMessageFor(model => model.TotalScored)
+</div>
+
+<div class="editor-label">
+    Team
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.TeamId, ((IEnumerable<MvcJQueryTemplate.Models.Team>)ViewBag.PossibleTeams).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.TeamId.ToString(),
+        Selected = (Model != null) && (option.TeamId == Model.TeamId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.TeamId)
+</div>

@@ -1,0 +1,23 @@
+@model MvcJQueryTemplate.Models.Player
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Player</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">Team</div>
+    <div class="display-field">@(Model.Team == null ? "None" : Model.Team.Name)</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PlayerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

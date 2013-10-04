@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Teams and Players";
+}
+
+<h2>Teams and Players</h2>
+
+<script src="~/Scripts/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/jQuery.tmpl.min.js"></script>
+
+<input type="button" value="Show Data" onclick="showTeams();" />
+
+<script id="teamTemplate" type="text/html">
+    <tr>
+        <td>${Name}</td>
+        <td>${City}</td>
+        <td>${Founded}</td>
+        <td>
+            <ol>
+                {{each Players}}
+                    <li>${$value.Name} - ${$value.TotalScored} Runs</li>
+                {{/each}}
+            </ol>
+        </td>
+    </tr>
+</script>
+
+<table>
+    <tbody class="header">
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Founded</th>
+            <th>Players</th>
+        </tr>
+    </tbody>
+    <tbody id="teamList"></tbody>
+</table>
+
+<script>
+    function showTeams(e) {
+        $.getJSON("/Teams/RequestData/", function (data) {
+            $("#teamList").html($("#teamTemplate").tmpl(data));
+        });
+    }
+
+    function GetDate(jsonDate) {
+        var value = new Date(parseInt(jsonDate.substr(6)));
+        return value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear();
+    }
+</script>
+
+<style>
+    table, td, th {
+        border: 1px solid green;
+        margin: 0;
+    }
+
+    th {
+        background-color: green;
+        color: white;
+    }
+</style>
